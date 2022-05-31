@@ -1,0 +1,48 @@
+CREATE TABLE Employee( employee_id integer,  name text,
+                       office_number integer,     floor_number integer,
+                       phone_number    text,     email_address  text,
+		      PRIMARY KEY (employee_id));
+					   
+CREATE TABLE Meeting( meeting_id integer, employee_id integer,
+                      room_number integer, floor_number integer,
+                      meeting_start_time integer, 
+		     PRIMARY KEY (meeting_id),
+		     FOREIGN KEY (employee_id) REFERENCES Employee(employee_id));
+					  
+CREATE TABLE Notification( notification_id          integer,  employee_id    integer,
+                           notification_date text,     notification_type integer,
+			  FOREIGN KEY (employee_id) REFERENCES Employee(employee_id),
+			  PRIMARY KEY(notification_id));
+						   
+CREATE TABLE Symptom( row_id integer,  employee_id integer,
+                      date_reported text, symptom_id integer,
+		     FOREIGN KEY (employee_id) REFERENCES Employee(employee_id));
+					  
+CREATE TABLE Scan( scan_id integer,  employee_id integer,
+                   scan_date text, temperature integer,
+		  PRIMARY KEY(scan_id),
+		  FOREIGN KEY (employee_id) REFERENCES Employee(employee_id));	
+				   
+CREATE TABLE Test( test_id integer,  employee_id integer,
+                   test_date text, test_location text,
+		  test_result text, 
+		  PRIMARY KEY(test_id),
+		  FOREIGN KEY (employee_id) REFERENCES Employee(employee_id));	
+				   
+CREATE TABLE Cases( case_id integer,  employee_id integer,
+                    case_date text, resolution text,
+		   PRIMARY KEY(case_id),
+		   FOREIGN KEY (employee_id) REFERENCES Employee(employee_id));		
+					
+CREATE TABLE HealthStatus( row_id integer,  employee_id integer,
+                    	  update_date text, status text,
+			  PRIMARY KEY(row_id),
+			  FOREIGN KEY (employee_id) REFERENCES Employee(employee_id));		
+						   
+						   
+						   
+INSERT INTO Employee VALUES (100,'JOHNSON_ADMIN',6,3,'831-239-4487','Johnson@usc.edu');
+INSERT INTO Employee VALUES (101,'JASON_ADWEN',2,7,'258-232-4487','Jason@usc.edu');
+INSERT INTO Employee VALUES (102,'Aaron_ADWEN',2,4,'257-232-9527','Aaron@usc.edu');
+
+SELECT * FROM Employee;
